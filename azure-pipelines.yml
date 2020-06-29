@@ -32,6 +32,7 @@ steps:
     configMode: 'manual'
     cliProjectKey: 'java-build-sample'
     cliProjectName: 'java-build-sample'
+    cliSources: '.'
   
 - script: |
     ./mvnw -B -e clean package 
