@@ -33,7 +33,6 @@ steps:
     cliProjectKey: 'java-build-sample'
     cliProjectName: 'java-build-sample'
     cliProjectVersion: '0.0.1-SNAPSHOT'
-    cliSources: '.'
 
 - script: |
     ./mvnw -B -e clean sonar:sonar package 
