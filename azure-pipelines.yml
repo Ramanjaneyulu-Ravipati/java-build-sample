@@ -32,10 +32,11 @@ steps:
     configMode: 'manual'
     cliProjectKey: 'java-build-sample'
     cliProjectName: 'java-build-sample'
-    cliProjectVersion: '0.0.1-SNAPSHOT'
-
+- task: SonarQubeAnalyze@4
+  displayName: 'Sonarqube Analysis'
+  
 - script: |
-    ./mvnw -B -e clean sonar:sonar package 
+    ./mvnw -B -e clean package 
   displayName: 'Maven Package'
 
 - task: CopyFiles@2
