@@ -25,7 +25,18 @@ steps:
     path: $(MAVEN_CACHE_FOLDER)
   displayName: Cache Maven local repo
 
-- script: ./mvnw -B -e clean package
+- task: SonarQubePrepare@4
+  inputs:
+    SonarQube: 'sonar_maerskdev_net'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'java-build-sample'
+    cliProjectName: 'java-build-sample'
+    cliProjectVersion: '0.0.1-SNAPSHOT'
+    cliSources: '.'
+
+- script: |
+    ./mvnw -B -e clean sonar:sonar package 
   displayName: 'Maven Package'
 
 - task: CopyFiles@2
