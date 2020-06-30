@@ -27,24 +27,27 @@ steps:
 
 - task: SonarQubePrepare@4
   inputs:
-    SonarQube: 'sonar_maerskdev_net'
+    SonarQube: 'ado_sonar_maerskdev_net_tmp'
     scannerMode: 'CLI'
     configMode: 'manual'
     cliProjectKey: 'java-build-sample'
     cliProjectName: 'java-build-sample'
     cliSources: '.'
     extraProperties: |
-      sonar.sources=src/main/java/
       sonar.language=java
       sonar.java.binaries=target/classes
-  
+
 - script: |
     ./mvnw -B -e clean package 
   displayName: 'Maven Package'
 
 - task: SonarQubeAnalyze@4
   displayName: 'Sonarqube Analysis'
-  
+
+- task: SonarQubePublish@4
+  inputs:
+    pollingTimeoutSec: '300'
+  displayName: 'Sonarqube Publish'
 - task: CopyFiles@2
   inputs:
     SourceFolder: 'target'
