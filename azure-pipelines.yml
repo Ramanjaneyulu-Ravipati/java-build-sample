@@ -14,6 +14,8 @@ pool:
 variables:
   MAVEN_CACHE_FOLDER: $(Pipeline.Workspace)/.m2/repository
   MAVEN_OPTS: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+  maven_sonarqube_plugins: 'org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar'
+  maven_buildhelper_plugins: 'org.codehaus.mojo:build-helper-maven-plugin:3.2.0:build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit'
 
 steps:
 - task: Cache@2
@@ -38,11 +40,13 @@ steps:
       sonar.java.binaries=target/classes
 
 - script: |
-    ./mvnw -B -e clean package 
+    ./mvnw -B -e clean package $(maven_sonarqube_plugins) 
+  env:
+    MAVEN_OPTS: $(MAVEN_OPTS)
   displayName: 'Maven Package'
 
-- task: SonarQubeAnalyze@4
-  displayName: 'Sonarqube Analysis'
+#- task: SonarQubeAnalyze@4
+#  displayName: 'Sonarqube Analysis'
 
 - task: SonarQubePublish@4
   inputs:
