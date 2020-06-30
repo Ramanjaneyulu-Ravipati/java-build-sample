@@ -36,7 +36,7 @@ steps:
     extraProperties: |
       sonar.sources=src/main/java/
       sonar.language=java
-      sonar.java.binaries=**/target/classes
+      sonar.java.binaries=target/classes
   
 - script: |
     ./mvnw -B -e clean package 
