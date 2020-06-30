@@ -30,11 +30,7 @@ steps:
 - task: SonarQubePrepare@4
   inputs:
     SonarQube: 'ado_sonar_maerskdev_net_tmp'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: 'java-build-sample'
-    cliProjectName: 'java-build-sample'
-    cliSources: '.'
+    scannerMode: 'Other'
     extraProperties: |
       sonar.language=java
       sonar.java.binaries=target/classes
