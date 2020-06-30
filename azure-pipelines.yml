@@ -31,9 +31,6 @@ steps:
   inputs:
     SonarQube: 'ado_sonar_maerskdev_net_tmp'
     scannerMode: 'Other'
-    #extraProperties: |
-    #  sonar.language=java
-    #  sonar.java.binaries=target/classes
 
 - script: |
     ./mvnw -B -e clean package $(maven_sonarqube_plugins) 
@@ -41,13 +38,7 @@ steps:
     MAVEN_OPTS: $(MAVEN_OPTS)
   displayName: 'Maven Package'
 
-#- task: SonarQubeAnalyze@4
-#  displayName: 'Sonarqube Analysis'
 
-#- task: SonarQubePublish@4
-#  inputs:
-#    pollingTimeoutSec: '300'
-#  displayName: 'Sonarqube Publish'
 - task: CopyFiles@2
   inputs:
     SourceFolder: 'target'
