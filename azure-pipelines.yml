@@ -25,7 +25,7 @@ steps:
       maven | "$(Agent.OS)"
       maven
     path: $(MAVEN_CACHE_FOLDER)
-  displayName: Cache Maven local repo
+  displayName: Cache Maven local repo test
 
 - task: SonarQubePrepare@4
   inputs:
