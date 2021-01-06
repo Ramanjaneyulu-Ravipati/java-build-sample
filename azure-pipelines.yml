@@ -29,8 +29,12 @@ steps:
 
 - task: SonarQubePrepare@4
   inputs:
-    SonarQube: 'ado_sonar_maerskdev_net_tmp'
+    SonarQube: 'ado_sonar_maerskdev_net'
     scannerMode: 'Other'
+
+- task: MavenAuthenticate@0
+  inputs:
+    mavenServiceConnections: 'NexusMaerskDevNetRW-Martians'
 
 - script: |
     ./mvnw -B -e clean package $(maven_sonarqube_plugins) 
